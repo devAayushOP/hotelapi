@@ -26,6 +26,9 @@ const connect = async () => {
 //     console.log("mongoDB disconnected")
 // })
 
+
+app.use(express.json());
+
 app.get("/", (req,res)=>{
     res.send("Hello there!")
 })
