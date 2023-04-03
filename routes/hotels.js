@@ -41,6 +41,16 @@ router.post("/", async(req,res)=>{
   }
 })
 
+router.get("/", async (req, res) => {
+  try {
+    const hotels = await Hotel.find({});
+    return res.send(hotels);
+  } catch (err) {
+    console.log(err);
+    return res.send({ msg: "Something went wrong" });
+  }
+});
+
 //UPDATE
 //DELETE
 

@@ -10,12 +10,12 @@ const app = express()
 dotenv.config()
 
 const connect = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO);
-        console.log("connected to mongoDB");
-    } catch (error) {
-        throw error;
-    }
+  try {
+    await mongoose.connect(process.env.MONGO);
+    console.log("connected to mongoDB");
+  } catch (error) {
+    console.log("err on mongo", error);
+  }
 };
 
 // mongoose.connection.on("conneted", () => {
@@ -26,12 +26,16 @@ const connect = async () => {
 //     console.log("mongoDB disconnected")
 // })
 
-
 app.use(express.json());
 
-app.get("/", (req,res)=>{
-    res.send("Hello there!")
-})
+// app.get("/", (req, res) => {
+//   res.send("Hello there!");
+// });
+app.use("/", (req, res, next) => {
+  //   return res.send({ mothod: req.method, url: req.url, body: req.body });
+  console.log("middleware called:");
+  next();
+});
 
 // we have used middleware here
 // app.use("/api/auth", authRoute); 
